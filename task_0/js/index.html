@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let studentsList = [
+        { firstName: "Peter", lastName: "Parker", age: 24, location: "New York"},
+        { firstName: "Mary", lastName: "Jane", age: 23, location: "New York"}
+        ];
+
+        let table = document.createElement('table');
+        table.border = '1';
+
+        studentsList.forEach(student => {
+            let row = document.createElement('tr');
+
+             let firstNameCell = document.createElement('td');
+             firstNameCell.textContent = student.firstName;
+             row.appendChild(locationCell);
+
+             table.appendChild(row);
+        });
+
+        document.body.appendChild(table);
+    </script>
+</body>
+</html>
