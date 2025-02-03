@@ -28,6 +28,40 @@ interface StudentClassInterface {
     displayName(): string;
 }
 
+/**
+ * Represents a student with a first name and last name.
+ * Implements the StudentClassInterface.
+ */
+class StudentClass {
+    /**
+     * The first name of the student.
+     */
+    firstName: string;
+
+    /**
+     * The last name of the student.
+     */
+    lastName: string;
+
+    /**
+     * Creates an instance of StudentClass.
+     * @param firstName - The first name of the student.
+     * @param lastName - The last name of the student.
+     */
+    constructor(firstName: string, lastName: string) {}
+
+    /**
+     * Simulates the student working on homework.
+     * @returns A string indicating the student is currently working.
+     */
+    workOnHomework(): string {}
+
+    /**
+     * Displays the first name of the student.
+     * @returns The first name of the student.
+     */
+    displayName(): string {}
+}
 class StudentClass implements StudentClassInterface {
     firstName: string;
     lastName: string;

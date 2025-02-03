@@ -10,6 +10,21 @@ interface TeacherInterface {
     workTeacherTasks(): string;
 }
 
+/**
+ * The Director class implements the DirectorInterface and provides
+ * specific implementations for the methods defined in the interface.
+ * 
+ * @implements {DirectorInterface}
+ * 
+ * @method workDirectorTasks
+ * @returns {string} - Returns a string indicating the director is working from home.
+ * 
+ * @method getCoffeeBreak
+ * @returns {string} - Returns a string indicating the director is getting a coffee break.
+ * 
+ * @method workFromHome
+ * @returns {string} - Returns a string indicating the director is performing director tasks.
+ */
 class Director implements DirectorInterface {
     workDirectorTasks(): string {
         return "Working from home";

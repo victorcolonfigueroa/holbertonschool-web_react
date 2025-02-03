@@ -7,6 +7,13 @@ interface MinorCredits {
     credits: number;
 }
 
+/**
+ * Sums the credits of two MajorCredits objects.
+ *
+ * @param subject1 - The first MajorCredits object.
+ * @param subject2 - The second MajorCredits object.
+ * @returns An object containing the total credits.
+ */
 function sumMajorCredits(subject1: MajorCredits, subject2: MajorCredits) {
     return { credits: subject1.credits + subject2.credits };
 };

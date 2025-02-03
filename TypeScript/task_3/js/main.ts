@@ -4,6 +4,13 @@
 import { RowId, RowElement } from './interface';
 import * as CRUD from './crud';
 
+/**
+ * Represents a row element with a first name and a last name.
+ * 
+ * @type {RowElement}
+ * @property {string} firstName - The first name of the row element.
+ * @property {string} lastName - The last name of the row element.
+ */
 const row: RowElement = {
     firstName: "Guillaume",
     lastName: "Slava"
