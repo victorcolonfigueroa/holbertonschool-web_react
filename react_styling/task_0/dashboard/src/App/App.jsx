@@ -10,6 +10,15 @@ import BodySection from "../BodySection/BodySection.jsx";
 import { getLatestNotification } from "../utils/utils.js";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    // local state to control notifications drawer visibility
+    this.state = {
+      displayDrawer: false,
+    };
+  }
+
   // Lifecycle method: called after component is mounted to the DOM
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeydown);
@@ -27,6 +36,16 @@ class App extends Component {
       alert("Logging you out");
       logOut();
     }
+  };
+
+  // Show the notifications drawer
+  handleDisplayDrawer = () => {
+    this.setState({ displayDrawer: true });
+  };
+
+  // Hide the notifications drawer
+  handleHideDrawer = () => {
+    this.setState({ displayDrawer: false });
   };
 
   render() {
@@ -61,7 +80,9 @@ class App extends Component {
           <div className="root-notifications">
             <Notifications
               notifications={notificationsList}
-              displayDrawer={true}
+              displayDrawer={this.state.displayDrawer}
+              handleDisplayDrawer={this.handleDisplayDrawer}
+              handleHideDrawer={this.handleHideDrawer}
             />
           </div>
           <Header />

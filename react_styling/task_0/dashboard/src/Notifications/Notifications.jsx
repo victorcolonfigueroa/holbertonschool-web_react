@@ -10,9 +10,12 @@ class Notifications extends Component {
     // Compare the length of the notifications array
     const currentLength = this.props.notifications?.length || 0;
     const nextLength = nextProps.notifications?.length || 0;
-    
-    // Only re-render if the length changed
-    return currentLength !== nextLength;
+    // Also re-render if the displayDrawer prop changed
+    const currentDisplay = this.props.displayDrawer;
+    const nextDisplay = nextProps.displayDrawer;
+
+    // Re-render if the length changed OR the displayDrawer visibility changed
+    return currentLength !== nextLength || currentDisplay !== nextDisplay;
   }
 
   markAsRead = (id) => {
@@ -25,7 +28,17 @@ class Notifications extends Component {
 
     return (
       <div className="notifications-root">
-        <div className="notification-title">Your notifications</div>
+        <div
+          className="notification-title"
+          role="button"
+          tabIndex={0}
+          onClick={() => this.props.handleDisplayDrawer && this.props.handleDisplayDrawer()}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") this.props.handleDisplayDrawer && this.props.handleDisplayDrawer();
+          }}
+        >
+          Your notifications
+        </div>
 
         {displayDrawer && (
           <div className="notification-items">
@@ -35,6 +48,7 @@ class Notifications extends Component {
               aria-label="Close"
               onClick={() => {
                 console.log("Close button has been clicked");
+                this.props.handleHideDrawer && this.props.handleHideDrawer();
               }}
             >
               <img
@@ -69,6 +83,8 @@ class Notifications extends Component {
 
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
+  handleDisplayDrawer: PropTypes.func,
+  handleHideDrawer: PropTypes.func,
   notifications: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -77,6 +93,13 @@ Notifications.propTypes = {
       html: PropTypes.shape({ __html: PropTypes.string }),
     })
   ),
+};
+
+Notifications.defaultProps = {
+  displayDrawer: false,
+  notifications: [],
+  handleDisplayDrawer: null,
+  handleHideDrawer: null,
 };
 
 export default Notifications;

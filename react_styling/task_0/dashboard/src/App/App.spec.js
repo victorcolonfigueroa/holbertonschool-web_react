@@ -5,7 +5,8 @@ describe("App component", () => {
   // Integration: the App shell should mount the notifications panel.
   test("renders the notifications component", () => {
     render(<App />);
-    const notificationsCopy = screen.getByText(/here is the list of notifications/i);
+    // The notifications menu/title should always be present (drawer may be hidden)
+    const notificationsCopy = screen.getByText(/your notifications/i);
     expect(notificationsCopy).toBeInTheDocument();
   });
 
@@ -51,6 +52,8 @@ describe("App component", () => {
   // Test keyboard shortcut: Ctrl+H calls logOut function
   test("calls logOut function when control and h keys are pressed", () => {
     const logOutMock = jest.fn();
+    // mock alert to avoid jsdom not-implemented error
+    const alertMock = jest.spyOn(window, "alert").mockImplementation(() => {});
     render(<App logOut={logOutMock} />);
 
     // Simulate Ctrl+H keydown event
@@ -63,6 +66,8 @@ describe("App component", () => {
 
     // Verify logOut was called once
     expect(logOutMock).toHaveBeenCalledTimes(1);
+
+    alertMock.mockRestore();
   });
 
   // Test keyboard shortcut: Ctrl+H displays alert message

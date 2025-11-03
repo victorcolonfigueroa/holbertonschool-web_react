@@ -15,6 +15,16 @@ describe("Notifications component", () => {
     expect(screen.getByText(/your notifications/i)).toBeInTheDocument();
   });
 
+  test("clicking on the menu item calls handleDisplayDrawer", () => {
+    const displaySpy = jest.fn();
+    render(<Notifications handleDisplayDrawer={displaySpy} displayDrawer={false} />);
+
+    const menu = screen.getByText(/your notifications/i);
+    fireEvent.click(menu);
+
+    expect(displaySpy).toHaveBeenCalled();
+  });
+
   // displayDrawer = false: no drawer content
   test("does not render drawer content when displayDrawer is false", () => {
     render(<Notifications notifications={notificationsList} displayDrawer={false} />);
@@ -72,6 +82,16 @@ describe("Notifications component", () => {
     expect(consoleSpy).toHaveBeenCalledWith("Close button has been clicked");
 
     consoleSpy.mockRestore();
+  });
+
+  test("clicking on the close button calls handleHideDrawer", () => {
+    const hideSpy = jest.fn();
+    render(<Notifications notifications={notificationsList} displayDrawer={true} handleHideDrawer={hideSpy} />);
+
+    const closeButton = screen.getByRole("button", { name: /close/i });
+    fireEvent.click(closeButton);
+
+    expect(hideSpy).toHaveBeenCalled();
   });
 
   test("logs correct message when a notification item is clicked", () => {
